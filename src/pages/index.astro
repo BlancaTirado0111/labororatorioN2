@@ -1,9 +1,11 @@
+---
 
 import PostCard from '../components/PostCard.astro';
-
+import type { Post } from '../Types/Post'; 
+import style from '../../public/global.css'
 
 const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-const posts = await res.json();
+const posts: Post[] = await res.json();
 ---
 
 <html>
@@ -14,20 +16,9 @@ const posts = await res.json();
 <body>
   <h1>Bienvenido a mi Blog</h1>
   <div>
-    {posts.map(post => (
+    {posts.map((post: Post) => (
       <PostCard key={post.id} post={post} />
     ))}
   </div>
 </body>
-
-<footer>
-	<div class="footer-content">
-		<h3>Mi Blog en Astro</h3>
-		<ul class="sociales">
-		  <li><a href="#">Facebook</a></li>
-		  <li><a href="#">Twitter</a></li>
-		  <li><a href="#">Instagram</a></li>
-		</ul>
-	  </div>
-</footer>
 </html>
